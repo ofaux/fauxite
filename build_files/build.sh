@@ -43,6 +43,7 @@ NIRI_PKGS=(
 	cava
 	cliphist
 	greetd
+	greetd-selinux
 	dms-greeter 
 	dgop
 	dsearch
