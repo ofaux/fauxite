@@ -39,7 +39,6 @@ done
 
 NIRI_PKGS=(
     dms
-    
 	niri
 	cava
 	cliphist
@@ -58,7 +57,7 @@ NIRI_PKGS=(
 # have an associated fedora package:
 #
 #   fira-code-fonts
-#   google-droid-sans-fonts
+#   google-droid-sans-fontsbazzirico
 #   google-noto-emoji-fonts
 #   google-noto-sans-cjk-fonts
 #   google-noto-color-emoji-fonts
