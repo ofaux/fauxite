@@ -39,9 +39,11 @@ done
 
 NIRI_PKGS=(
     dms
+    
 	niri
 	cava
 	cliphist
+	dms-greeter 
 	dgop
 	dsearch
 	gnome-keyring
