@@ -42,6 +42,7 @@ NIRI_PKGS=(
 	niri
 	cava
 	cliphist
+	greetd
 	dms-greeter 
 	dgop
 	dsearch
