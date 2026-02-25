@@ -52,7 +52,6 @@ NIRI_PKGS=(
 	xdg-desktop-portal-gtk
 	xwayland-satellite
 	kde-connect
-	python3-pywal
     python3-pip
 )
 
@@ -95,7 +94,27 @@ dnf5 install --setopt=install_weak_deps=False -y \
 	
 # Install pywalfox via pip
 log "Installing pywalfox via pip..."
-pip install --prefix=/usr --no-cache-dir --break-system-packages pywalfox
+# 2. INSTALL both pywal and pywalfox via pip
+log "Installing pywal and pywalfox via pip..."
+pip install --prefix=/usr --no-cache-dir  pywal pywalfox
+
+### 5. Bake in the Systemd User Unit for Pywalfox
+log "Creating and enabling pywalfox systemd user unit..."
+mkdir -p /usr/lib/systemd/user/
+cat <<EOF > /usr/lib/systemd/user/pywalfox.service
+[Unit]
+Description=Pywalfox Daemon
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/pywalfox start
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
+EOF
+
 #######################################################################
 ### Disable repositeories so they aren't cluttering up the final image
 
