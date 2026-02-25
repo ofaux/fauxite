@@ -52,6 +52,8 @@ NIRI_PKGS=(
 	xdg-desktop-portal-gtk
 	xwayland-satellite
 	kde-connect
+	python3-pywal
+    python3-pip
 )
 
 # Note that many font packages are preinstalled in the
@@ -90,7 +92,10 @@ dnf5 install --setopt=install_weak_deps=False -y \
 	"${FONTS[@]}" \
 	"${NIRI_PKGS[@]}" \
 	"${ADDITIONAL_SYSTEM_APPS[@]}"
-
+	
+# Install pywalfox via pip
+log "Installing pywalfox via pip..."
+pip install --prefix=/usr --no-cache-dir pywalfox
 #######################################################################
 ### Disable repositeories so they aren't cluttering up the final image
 
