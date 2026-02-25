@@ -52,7 +52,6 @@ NIRI_PKGS=(
 	xdg-desktop-portal-gtk
 	xwayland-satellite
 	kde-connect
-    python3-pip
 )
 
 # Note that many font packages are preinstalled in the
@@ -91,41 +90,6 @@ dnf5 install --setopt=install_weak_deps=False -y \
 	"${FONTS[@]}" \
 	"${NIRI_PKGS[@]}" \
 	"${ADDITIONAL_SYSTEM_APPS[@]}"
-	
-# Install pywalfox via pip
-log "Installing pywalfox via pip..."
-# 2. INSTALL both pywal and pywalfox via pip
-log "Installing pywal and pywalfox via pip..."
-pip install --prefix=/usr --no-cache-dir  pywal pywalfox
-
-# Create a wrapper for Flatpak to talk to the system pywalfox
-log "Creating Flatpak bridge for pywalfox..."
-mkdir -p /usr/libexec/
-cat <<EOF > /usr/libexec/pywalfox-bridge
-#!/bin/bash
-flatpak-spawn --host /usr/bin/pywalfox "\$@"
-EOF
-chmod +x /usr/libexec/pywalfox-bridge
-
-### 5. Bake in the Systemd User Unit for Pywalfox
-log "Creating and enabling pywalfox systemd user unit..."
-mkdir -p /usr/lib/systemd/user/
-cat <<EOF > /usr/lib/systemd/user/pywalfox.service
-[Unit]
-Description=Pywalfox Daemon & DMS Color Linker
-After=graphical-session.target
-
-[Service]
-# This line handles the 'additional instruction' from the DMS docs automatically
-ExecStartPre=/usr/bin/bash -c 'mkdir -p %h/.cache/wal && ln -sf %h/.cache/wal/dank-pywalfox.json %h/.cache/wal/colors.json'
-# The daemon
-ExecStart=/usr/bin/pywalfox daemon
-Restart=always
-RestartSec=5
-
-[Install]
-WantedBy=default.target
-EOF
 
 #######################################################################
 ### Disable repositeories so they aren't cluttering up the final image
