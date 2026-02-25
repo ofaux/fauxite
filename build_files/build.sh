@@ -103,13 +103,16 @@ log "Creating and enabling pywalfox systemd user unit..."
 mkdir -p /usr/lib/systemd/user/
 cat <<EOF > /usr/lib/systemd/user/pywalfox.service
 [Unit]
-Description=Pywalfox Daemon
+Description=Pywalfox Daemon & DMS Color Linker
 After=graphical-session.target
 
 [Service]
+# This line handles the 'additional instruction' from the DMS docs automatically
+ExecStartPre=/usr/bin/bash -c 'mkdir -p %h/.cache/wal && ln -sf %h/.cache/wal/dank-pywalfox.json %h/.cache/wal/colors.json'
+# The daemon
 ExecStart=/usr/bin/pywalfox daemon
 Restart=always
-RestartSec=3
+RestartSec=5
 
 [Install]
 WantedBy=default.target
