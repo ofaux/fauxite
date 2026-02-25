@@ -98,6 +98,15 @@ log "Installing pywalfox via pip..."
 log "Installing pywal and pywalfox via pip..."
 pip install --prefix=/usr --no-cache-dir  pywal pywalfox
 
+# Create a wrapper for Flatpak to talk to the system pywalfox
+log "Creating Flatpak bridge for pywalfox..."
+mkdir -p /usr/libexec/
+cat <<EOF > /usr/libexec/pywalfox-bridge
+#!/bin/bash
+flatpak-spawn --host /usr/bin/pywalfox "\$@"
+EOF
+chmod +x /usr/libexec/pywalfox-bridge
+
 ### 5. Bake in the Systemd User Unit for Pywalfox
 log "Creating and enabling pywalfox systemd user unit..."
 mkdir -p /usr/lib/systemd/user/
