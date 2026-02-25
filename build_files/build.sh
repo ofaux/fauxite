@@ -95,7 +95,7 @@ dnf5 install --setopt=install_weak_deps=False -y \
 	
 # Install pywalfox via pip
 log "Installing pywalfox via pip..."
-pip install --prefix=/usr --no-cache-dir pywalfox
+pip install --prefix=/usr --no-cache-dir --break-system-packages pywalfox
 #######################################################################
 ### Disable repositeories so they aren't cluttering up the final image
 
