@@ -52,6 +52,7 @@ NIRI_PKGS=(
 	wl-clipboard
 	xdg-desktop-portal-gtk
 	xwayland-satellite
+	kdeconnect
 )
 
 # Note that many font packages are preinstalled in the
