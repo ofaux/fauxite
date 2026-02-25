@@ -107,7 +107,7 @@ Description=Pywalfox Daemon
 After=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/pywalfox start
+ExecStart=/usr/bin/pywalfox daemon
 Restart=always
 RestartSec=3
 
