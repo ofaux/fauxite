@@ -52,6 +52,7 @@ NIRI_PKGS=(
 	xdg-desktop-portal-gtk
 	xwayland-satellite
 	kde-connect
+	libqalculate
 )
 
 # Note that many font packages are preinstalled in the
