@@ -51,7 +51,6 @@ NIRI_PKGS=(
 	wl-clipboard
 	xdg-desktop-portal-gtk
 	xwayland-satellite
-	kde-connect
 	libqalculate
 )
 
