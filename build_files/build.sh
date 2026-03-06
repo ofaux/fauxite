@@ -99,3 +99,4 @@ for repo in "${COPR_REPOS[@]}"; do
 	dnf5 -y copr disable "$repo"
 done
 systemctl enable podman.socket
+systemctl enable uupd.timer
